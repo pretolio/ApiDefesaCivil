@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install",
     "start": "node server.js",
-    "build-and-start": "npm run build"
+    "build-and-start": "npm run build && npm run start"
   },
   "keywords": [],
   "author": "",

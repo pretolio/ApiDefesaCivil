@@ -1,6 +1,3 @@
 [build]
   publish = "public"
-  command = "npm run build-and-start"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+  command = "npm run build"
