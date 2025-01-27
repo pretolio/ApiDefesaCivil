@@ -4,7 +4,9 @@ const xml2js = require('xml2js');
 const app = express();
 const port = 3000;
 
-// ...existing code...
+// Aumentar o limite de tamanho do JSON
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 function processDetails(details) {
     if (details && details.alert && details.alert.info) {
@@ -27,7 +29,7 @@ function processDetails(details) {
     }
 }
 
-app.get('/', async (req, res) => {
+app.get('/api/defesa-civil', async (req, res) => {
     try {
         const response = await axios.get('https://apiprevmet3.inmet.gov.br/avisos/rss');
         const parser = new xml2js.Parser();
@@ -67,7 +69,9 @@ app.get('/', async (req, res) => {
     }
 });
 
-// ...existing code...
+app.get('/', (req, res) => {
+    res.send('Bem-vindo à Defesa Civil');
+});
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);

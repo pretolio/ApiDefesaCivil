@@ -1,23 +1,19 @@
 {
   "name": "apidefesacivil",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "next start",
-    "build": "next build",
-    "dev": "next dev"
+    "start": "node server.js",
+    "build-and-start": "npm run build && npm run start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2",
     "axios": "^1.4.0",
-    "xml2js": "^0.4.23",
-    "next": "^12.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "express": "^4.21.2",
+    "xml2js": "^0.6.2"
   }
 }
