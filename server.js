@@ -27,7 +27,7 @@ function processDetails(details) {
     }
 }
 
-app.get('/api/defesa-civil', async (req, res) => {
+app.get('/', async (req, res) => {
     try {
         const response = await axios.get('https://apiprevmet3.inmet.gov.br/avisos/rss');
         const parser = new xml2js.Parser();
