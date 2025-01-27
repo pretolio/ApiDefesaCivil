@@ -1,10 +1,14 @@
 const express = require('express');
+const next = require('next');
 const axios = require('axios');
 const xml2js = require('xml2js');
-const app = express();
-const port = 3000;
 
-// ...existing code...
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+
+const server = express();
+const port = process.env.PORT || 3000;
 
 function processDetails(details) {
     if (details && details.alert && details.alert.info) {
@@ -27,7 +31,7 @@ function processDetails(details) {
     }
 }
 
-app.get('/', async (req, res) => {
+server.get('/api/defesa-civil', async (req, res) => {
     try {
         const response = await axios.get('https://apiprevmet3.inmet.gov.br/avisos/rss');
         const parser = new xml2js.Parser();
@@ -67,8 +71,13 @@ app.get('/', async (req, res) => {
     }
 });
 
-// ...existing code...
+server.all('*', (req, res) => {
+    return handle(req, res);
+});
 
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
+app.prepare().then(() => {
+    server.listen(port, (err) => {
+        if (err) throw err;
+        console.log(`Servidor rodando na porta ${port}`);
+    });
 });
